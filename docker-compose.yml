@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  app:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysql
+      environment:
+        # Use PostgreSQL connection string
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/curriculo_db
+        SPRING_DATASOURCE_USERNAME: postgres
+        SPRING_DATASOURCE_PASSWORD: password
+        SPRING_PROFILES_ACTIVE: dev
 
   mysql:
     image: mysql:8.0
